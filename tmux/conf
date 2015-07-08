@@ -62,6 +62,13 @@ bind-key -n C-j detach
 setw -g c0-change-trigger 10
 setw -g c0-change-interval 250
 
+### SSH
+
+bind -n M-s command-prompt -p "host" "split-window 'ssh %1'"
+bind -n M-S command-prompt -p "host" "new-window -n %1 'ssh %1'"
+
+###
+
 ### status line
 
 set -g status-utf8 on
