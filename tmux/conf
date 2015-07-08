@@ -14,10 +14,6 @@ set -g mouse-select-window on
 setw -g monitor-activity on
 set -g visual-activity on
 
-# Center the window list
-set -g status-justify centre
-
-
 ### TERM
 
 # set the default TERM
@@ -31,17 +27,10 @@ if "[[ ${TERM} =~ 256color || ${TERM} == fbterm ]]" 'set -g default-terminal scr
 
 ###
 
-### Status line
-
-set -g status-utf8 on
 set -g utf8 on
-
-set -g status-bg black
-set -g status-fg white
-
 set -g history-limit 10000
 
-# Session initialization
+### Session initialization
 new -s avee -n status sudo htop
 splitw -h -p 10 -t 0 watch uptime
 splitw -v -p 50 -t 1 watch df -h
@@ -49,6 +38,8 @@ selectp -t 0
 neww -n emacs emacs
 neww -n workspace
 selectw -t 2
+
+###
 
 #urxvt tab like window switching (-n: no prior escape seq)
 bind -n M-n new-window
@@ -62,7 +53,7 @@ unbind-key &
 bind-key & kill-session
 bind -n M-c kill-window
 bind -n M-t split-window -h
-bind -n S-M-t split-window
+bind -n M-T split-window
 
 # easy detach
 bind-key -n C-j detach
@@ -71,15 +62,53 @@ bind-key -n C-j detach
 setw -g c0-change-trigger 10
 setw -g c0-change-interval 250
 
-# show battery
+### status line
 
-set -g status-right 'Batt: #{battery_icon} #{battery_percentage} #{battery_remain} | %a %h-%d %H:%M '
+set -g status-utf8 on
+set -g status-bg default
+set -g status-fg white
+set -g status-justify centre
+set -g window-status-current-fg 'yellow'
+set -g status-left '#[fg=green]#{session_name} #[fg=white]|'
+set -g status-right-length 60
+set -g status-right 'Online: #{online_status} batt: #{battery_icon} #{battery_percentage} #{battery_remain} | %a %h-%d %H:%M '
+
+# statusbar --------------------------------------------------------------
+set -g window-status-format "#I:#W"
+set -g window-status-current-format "#I:#W"
+
+set -g status-keys vi
+bind-key -t vi-edit Up history-up
+bind-key -t vi-edit Down history-down
+
+set -g status-interval 1
+set -g status-justify centre # center align window list
+
+# default statusbar colors
+set -g status-fg white
+set -g status-bg default
+
+# bell colours
+set -g window-status-bell-bg default
+set -g window-status-bell-fg red
+set -g window-status-bell-attr bright
+
+# Statusbar starting in X or not
+if '[ -n "$DISPLAY" ]' 'source-file ~/.files/tmux/inx'
+if '[ -z "$DISPLAY" ]' 'source-file ~/.files/tmux/xless'
+
+###
 
 ### plugins
 
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-battery'
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-open'
+set -g @plugin 'tmux-plugins/tmux-online-status'
+set -g @plugin 'tmux-plugins/tmux-sidebar'
 
 run '~/.tmux/plugins/tpm/tpm'
 
