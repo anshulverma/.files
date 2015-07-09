@@ -42,7 +42,6 @@ selectw -t 2
 ###
 
 #urxvt tab like window switching (-n: no prior escape seq)
-bind -n M-n new-window
 bind -n S-left prev
 bind -n S-right next
 bind -n M-left swap-window -t -1
@@ -51,9 +50,14 @@ bind -n M-right swap-window -t +1
 # shortcuts to close/open windows
 unbind-key &
 bind-key & kill-session
-bind -n M-c kill-window
-bind -n M-t split-window -h
-bind -n M-T split-window
+bind-key w kill-pane
+bind-key W kill-window
+bind -n M-n split-window -h -c '#{pane_current_path}'
+bind -n M-N split-window -c '#{pane_current_path}'
+bind -n M-t new-window -c '#{pane_current_path}'
+bind-key '"' split-window -c '#{pane_current_path}'
+bind-key % split-window -h -c '#{pane_current_path}'
+bind-key S command-prompt "new-session -A -c '#{pane_current_path}' -s '%%'"
 
 # easy detach
 bind-key -n C-j detach
