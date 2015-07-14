@@ -3,6 +3,9 @@ unbind-key C-b
 set -g prefix 'C-q'
 bind-key C-q send-prefix
 
+# set default shell installed via brew
+set-option -g default-shell /usr/local/bin/bash
+
 # Default to emacs style mode keys
 setw -g mode-keys emacs
 
