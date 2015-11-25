@@ -71,6 +71,9 @@ bind-key S command-prompt "new-session -A -c '#{pane_current_path}' -s '%%'"
 # easy detach
 bind-key -n C-j detach
 
+# clear buffer using C-k
+bind -n C-k send-keys -R \; clear-history
+
 # limit amout of text printed at a time to prevent freeze
 setw -g c0-change-trigger 10
 setw -g c0-change-interval 250
