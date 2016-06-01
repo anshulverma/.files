@@ -40,7 +40,7 @@ set -g status-utf8 on
 set -g history-limit 10000
 
 ### Session initialization
-new -s avee -n status sudo htop
+new -s avee -n status "source ${BASH_RC_BASEDIR}/lib/util.bash; run-forever sudo htop"
 splitw -h -p 10 -t 0 watch uptime
 splitw -v -p 50 -t 1 watch df -h
 selectp -t 0
