@@ -9,12 +9,6 @@ set-option -g default-shell /usr/local/bin/bash
 # Default to emacs style mode keys
 setw -g mode-keys emacs
 
-# Mouse support - set to on if you want to use the mouse
-setw -g mode-mouse on
-set -g mouse-select-pane on
-set -g mouse-resize-pane on
-set -g mouse-select-window on
-
 # Set the default terminal mode to 256color mode
 # set -g default-terminal "screen-256color"
 
@@ -35,8 +29,6 @@ if "[[ ${TERM} =~ 256color || ${TERM} == fbterm ]]" 'set -g default-terminal scr
 
 ###
 
-set -g utf8 on
-set -g status-utf8 on
 set -g history-limit 10000
 
 ### Session initialization
@@ -75,8 +67,8 @@ bind-key -n C-j detach
 bind-key k send-keys -R \; clear-history
 
 # limit amout of text printed at a time to prevent freeze
-setw -g c0-change-trigger 10
-setw -g c0-change-interval 250
+# setw -g c0-change-trigger 10
+# setw -g c0-change-interval 250
 
 ### SSH
 
@@ -94,7 +86,6 @@ bind-key E split-window "emacsclient -nw"
 
 ### status line
 
-set -g status-utf8 on
 set -g window-status-format "#I:#W"
 set -g window-status-current-format "#I:#W"
 
@@ -129,25 +120,16 @@ if '[ -z "$DISPLAY" ]' 'source-file ~/.tmux/xless'
 
 # Mouse mode
 
-set -g mode-mouse on
-set -g mouse-resize-pane on
-set -g mouse-select-pane on
-set -g mouse-select-window on
+set-option -g mouse on
 
 # Toggle mouse on
 bind-key m \
-    set -g mode-mouse on \;\
-    set -g mouse-resize-pane on \;\
-    set -g mouse-select-pane on \;\
-    set -g mouse-select-window on \;\
+    set-option -g mouse on \;\
     display 'Mouse: ON'
 
 # Toggle mouse off
 bind-key M \
-    set -g mode-mouse off \;\
-    set -g mouse-resize-pane off \;\
-    set -g mouse-select-pane off \;\
-    set -g mouse-select-window off \;\
+    set-option -g mouse off \;\
     display 'Mouse: OFF'
 
 ###
@@ -162,6 +144,7 @@ set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-open'
 set -g @plugin 'tmux-plugins/tmux-online-status'
 set -g @plugin 'tmux-plugins/tmux-sidebar'
+set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 
 run '~/.tmux/plugins/tpm/tpm'
 
