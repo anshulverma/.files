@@ -365,17 +365,3 @@ set -g status-bg default
 set -g window-status-bell-bg default
 set -g window-status-bell-fg red
 set -g window-status-bell-attr bright
-
-### plugins
-
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-sensible'
-# set -g @plugin 'tmux-plugins/tmux-battery'
-set -g @plugin 'tmux-plugins/tmux-copycat'
-set -g @plugin 'tmux-plugins/tmux-yank'
-set -g @plugin 'tmux-plugins/tmux-open'
-# set -g @plugin 'tmux-plugins/tmux-online-status'
-set -g @plugin 'tmux-plugins/tmux-sidebar'
-set -g @plugin 'nhdaly/tmux-better-mouse-mode'
-
-###
