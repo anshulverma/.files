@@ -32,7 +32,7 @@ if "[[ ${TERM} =~ 256color || ${TERM} == fbterm ]]" 'set -g default-terminal scr
 set -g history-limit 10000
 
 ### Session initialization
-new -s avee -n status "source ${BASH_RC_BASEDIR}/lib/util.bash; run-forever sudo htop"
+new -s avee -n status htop
 splitw -h -p 10 -t 0 watch uptime
 splitw -v -p 50 -t 1 watch df -h
 selectp -t 0
@@ -90,8 +90,8 @@ set -g window-status-format "#I:#W"
 set -g window-status-current-format "#I:#W"
 
 set -g status-keys vi
-bind-key -t vi-edit Up history-up
-bind-key -t vi-edit Down history-down
+# bind-key -t vi-edit Up history-up
+# bind-key -t vi-edit Down history-down
 
 set -g status-interval 1
 set -g status-justify left # center align window list
